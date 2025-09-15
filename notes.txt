@@ -1,0 +1,2 @@
+# NodeJS - Native Runtime of JS.
+if we want to run JS without the help of browser then we need to install NodeJS.
