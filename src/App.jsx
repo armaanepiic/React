@@ -1,17 +1,16 @@
+import CountDisplay from './components/CountDisplay';
+import CounterButtons from './components/CounterButtons';
+import Header from './components/Header';
 
 import './App.css'
 
 function App() {
 
   return (
-    <div>
-      <div>
-        <h1 className='header'>Counter App</h1>
-      </div>
-      <div>
-        <button>+</button>
-        <button>-</button>
-      </div>
+    <div className='bg-white shadow-lg rounded-lg p-8 text-center'>
+      <Header/>
+      <CountDisplay/>
+      <CounterButtons/>
     </div>
   )
 }
