@@ -1,9 +1,9 @@
 import Display from "./components/Display";
 import CounterButtons from "./components/CounterButtons";
 import Header from "./components/Header";
+import { useEffect, useState } from "react";
 
 import "./App.css";
-import { useEffect, useState } from "react";
 
 function App() {
   const [count1, setCount1] = useState(0);
