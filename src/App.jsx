@@ -12,7 +12,7 @@ function App() {
   // useEffect-1
   useEffect(()=>{
     console.log("inside useEffect 1");
-  }, [count1])
+  }, [count1, count2])
 
   // useEffect-2
   useEffect(()=>{
