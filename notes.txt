@@ -3,3 +3,5 @@ if we want to run JS without the help of browser then we need to install NodeJS.
 
 # git commit --am --no-edit
 apply the previous commit
+
+# useEffect hook -> API call
