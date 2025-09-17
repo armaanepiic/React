@@ -1,13 +1,22 @@
-import React from "react";
+import clsx from "clsx";
 
-export default function MainContent() {
+
+export default function MainContent({theme}) {
   return (
-    <main className="flex-1 p-8 transition-colors duration-300 bg-white text-gray-800">
+    <main className={clsx(
+        "flex-1 p-8 transition-colors duration-300",
+        theme === "light" && "bg-white text-gray-800",
+        theme === "dark" && "bg-gray-800 text-white"
+      )}>
       <div className="max-w-3xl">
         <h2 className="text-3xl font-bold mb-6">
           Welcome to BongoDev's React Context Api App
         </h2>
-        <div className="p-6 rounded-lg mb-6 bg-blue-50 border border-blue-200">
+        <div className={clsx(
+            "p-6 rounded-lg mb-6",
+            theme === "light" && "bg-blue-50 border border-blue-200",
+            theme === "dark" && "bg-blue-900 border border-blue-700"
+          )}>
           <h3 className="text-xl font-semibold mb-3">What you're seeing:</h3>
           <ul className="space-y-2">
             <li>
@@ -23,7 +32,11 @@ export default function MainContent() {
           </ul>
         </div>
 
-        <div className="p-6 rounded-lg bg-gray-50 border border-gray-200">
+        <div className={clsx(
+            "p-6 rounded-lg bg-gray-50",
+            theme === "dark" && "bg-gray-50 border border-gray-200",
+            theme === "dark" && "bg-gray-700 border border-gray-600"
+          )}>
           <h3 className="text-xl font-semibold mb-3">Update User Name:</h3>
           <div className="flex gap-3">
             <input
