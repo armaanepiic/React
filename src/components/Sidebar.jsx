@@ -1,6 +1,8 @@
 import clsx from "clsx";
+import useTheme from "../hooks/useTheme";
 
-export default function Sidebar({ theme }) {
+export default function Sidebar() {
+  const {theme} = useTheme();
   const menuItems = ["Dashboard", "Settings", "Profile", "Help"];
   const items = menuItems.map((item, index) => (
     <li key={index}>
@@ -9,7 +11,7 @@ export default function Sidebar({ theme }) {
           "w-full text-left p-2 rounded-md hover:bg-opacity-80 transition-colors bg-gray-200 cursor-pointer",
           theme === "light" &&
             "bg-gray-50 text-gray-800 hover:bg-gray-800 hover:text-gray-50",
-          theme === "dark" && "bg-gray-800 text-gray-100 hover:text-gray-800"
+          theme === "dark" && "bg-gray-800 text-gray-100 hover:bg-gray-50 hover:text-gray-800"
         )}
       >
         {item}

@@ -1,6 +1,9 @@
 import clsx from "clsx";
+import useTheme from "../hooks/useTheme";
 
-export default function Header({ theme, toggletheme }) {
+
+export default function Header() {
+  const {theme, toggletheme} = useTheme();
   return (
     <header
       className={clsx(

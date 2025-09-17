@@ -1,24 +1,20 @@
-import Header from "./components/Header"
-import MainContent from "./components/MainContent"
-import Sidebar from "./components/Sidebar"
-import { useState } from "react";
-
-import './App.css'
+import Header from "./components/Header";
+import MainContent from "./components/MainContent";
+import Sidebar from "./components/Sidebar";
+import ThemeProvider from "./providers/ThemeProvider";
 
 function App() {
-  const [theme, setTheme] = useState("light");
-  const toggletheme = () => {
-    setTheme((prevTheme) => prevTheme === 'light' ? 'dark' : 'light');
-  }
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header theme={theme} toggletheme={toggletheme}/>
-      <div className="flex flex-1">
-        <Sidebar theme={theme}/>
-        <MainContent theme={theme}/>
+    <ThemeProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <div className="flex flex-1">
+          <Sidebar />
+          <MainContent />
+        </div>
       </div>
-    </div>
-  )
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

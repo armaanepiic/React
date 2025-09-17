@@ -1,7 +1,8 @@
 import clsx from "clsx";
+import useTheme from "../hooks/useTheme";
 
-
-export default function MainContent({theme}) {
+export default function MainContent() {
+  const {theme} = useTheme();
   return (
     <main className={clsx(
         "flex-1 p-8 transition-colors duration-300",
