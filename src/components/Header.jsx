@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import useTheme from "../hooks/useTheme";
+import { Link } from "react-router";
 
 export default function Header() {
   const { theme, toggletheme } = useTheme();
@@ -12,7 +13,9 @@ export default function Header() {
       )}
     >
       <div className="flex justify-between items-center max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold">My App</h1>
+        <Link to='/'>
+          <h1  className="text-2xl font-bold">My App</h1>
+        </Link>
         <div className="flex items-center space-x-4">
           <span>Welcome Guest</span>
           <button
