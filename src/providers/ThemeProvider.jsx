@@ -3,7 +3,7 @@ import ThemeContext from "../contexts/ThemeContext";
 import { useSearchParams } from "react-router";
 
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   const [searchParamas, setSearchParams] = useSearchParams();
 
   useEffect(() => {
