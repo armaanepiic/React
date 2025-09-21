@@ -21,15 +21,18 @@ export default function Header() {
           <button
             onClick={toggletheme}
             className={clsx(
-              "px-4 py-2 rounded-lg font-medium transition-colors duration-300 cursor-pointer",
+              "px-2 py-1 rounded-full transition-colors duration-300 cursor-pointer",
               theme === "light" && "bg-gray-800 text-white hover:bg-gray-700",
               theme === "dark" && "bg-white text-gray-800 hover:bg-gray-100"
             )}
           >
-            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+            <i className={theme === "light" ? "fas fa-moon" : "fas fa-sun"}></i>
+            {/* {theme === "light" ? " Dark" : " Light"} */}
           </button>
         </div>
       </div>
+      <div>
+    </div>
     </header>
   );
 }
