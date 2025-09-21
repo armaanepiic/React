@@ -1,0 +1,25 @@
+# when we want to see data => GET
+# when we send data to the server then there will be two types.
+    they are: 1. create a new product => POST (secured: can not be seen)
+              2. update existing something => POST/product
+
+# GET : when we want to see data
+# POST : create a new product
+# PUT : update existing something
+# PATCH : update some feature of existing something
+# DELETE : removing an item
+
+CRUD : CREAT, READ, UPDATE, DELETE
+
+CREAT => POST
+READ => GET
+UPDATE => PUT/PATCH
+DELETE => DELETE
+
+
+# status Codes
+# successfull status code : 200
+# create : 201
+# can not find anything : 404
+# user sends corrupted data: 400
+# internal error : 500

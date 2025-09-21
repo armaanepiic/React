@@ -1,11 +1,16 @@
 import express from 'express';
+import cors from 'cors';
 import { mockProducts } from './mockdata.js';
+import envConfig from "./config/envConfig.js";
 
 const app = express();
 
 app.use(express.json());
+app.use(cors({
+  origin: envConfig.ALLOWED_ORIGIN,
+}));
 
-const port = 5000;
+
 
 app.get("/status", (req, res) => {
   res.json(
@@ -20,6 +25,6 @@ app.get("/api/products" , (req, res) => {
 })
 
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(envConfig.PORT, () => {
+  console.log(`Example app listening on port ${envConfig.PORT}`);
 });
