@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 export default function Sidebar() {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const menuItems = ["Dashboard", "Settings", "Profile", "Help"];
+  const menuItems = ["Dashboard", "Product", "Settings", "Profile", "Help"];
   const items = menuItems.map((item, index) => (
     <li key={index}>
       <button
