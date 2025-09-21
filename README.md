@@ -439,3 +439,316 @@ useEffect(() => {
 ```
 
 This pattern is powerful for creating stateful, shareable, and persistent user experiences! 🚀
+
+# React Router Context App
+
+## Overview
+A comprehensive React application demonstrating **React Router v7**, **Context API**, and **modern React patterns**. Features include routing, nested layouts, theme management with URL synchronization, and responsive design.
+
+## Features
+- 🚀 **React Router v7** - Latest routing with nested layouts
+- 🌙 **Theme Management** - Dark/Light mode with URL persistence
+- 📱 **Responsive Design** - Mobile-friendly with Tailwind CSS
+- 🔗 **URL State Sync** - Theme state synchronized with URL parameters
+- 🎯 **Dynamic Navigation** - Programmatic navigation with useNavigate
+- 📄 **Multiple Page Types** - Dashboard, Profile, Login, About, 404
+- 🎨 **FontAwesome Icons** - Beautiful icons throughout the app
+
+## Project Structure
+```
+src/
+├── components/
+│   ├── Header.jsx          # Navigation header with theme toggle
+│   ├── MainContent.jsx     # Dashboard main content
+│   └── Sidebar.jsx         # Navigation sidebar
+├── pages/
+│   ├── About.jsx           # About page (standalone layout)
+│   ├── Dashboard.jsx       # Dashboard page (uses MainContent)
+│   ├── Login.jsx           # Login form page
+│   ├── NotFound.jsx        # 404 error page
+│   ├── Profile.jsx         # Profile with URL parameters demo
+│   └── RootLayout.jsx      # Main layout with Header + Sidebar
+├── contexts/
+│   └── ThemeContext.jsx    # Theme context definition
+├── hooks/
+│   └── useTheme.jsx        # Custom theme hook
+├── providers/
+│   └── ThemeProvider.jsx   # Theme provider with URL sync
+├── router/
+│   └── AppRouter.jsx       # Route configuration
+├── App.css                 # Component styles
+├── index.css              # Global styles
+└── main.jsx               # App entry point
+```
+
+## Routing Architecture
+
+### Route Configuration
+```javascript
+// AppRouter.jsx
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Dashboard />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="profile" element={<Profile />} />
+      <Route path="profile/:profileId" element={<Profile />} />
+      <Route path="settings" element={<h1>Settings</h1>} />
+      <Route path="help" element={<h1>Help</h1>} />
+    </Route>
+    <Route path="about" element={<About />} />
+    <Route path="login" element={<Login />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+</BrowserRouter>
+```
+
+### Layout System
+- **RootLayout**: Main app layout (Header + Sidebar + Outlet)
+- **Standalone Pages**: About, Login, 404 (no sidebar/header)
+- **Nested Routes**: All main app pages use RootLayout
+
+## Key Features Breakdown
+
+### 1. Theme Management with URL Sync
+
+#### ThemeProvider with useEffect
+```javascript
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Sync theme with URL
+  useEffect(() => {
+    setSearchParams({ ...searchParams, mode: theme });
+  }, [theme]);
+
+  const toggletheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+};
+```
+
+#### URL State Examples
+```
+localhost:3000/?mode=light  # Light theme
+localhost:3000/?mode=dark   # Dark theme
+localhost:3000/profile/123?mode=dark&user=Arman  # Profile with theme
+```
+
+### 2. Navigation Patterns
+
+#### Programmatic Navigation (Sidebar)
+```javascript
+const navigate = useNavigate();
+
+// Navigate to dynamic routes
+onClick={() => {
+  navigate(`/${item.toLowerCase()}`);
+}}
+```
+
+#### Link-based Navigation (Header)
+```javascript
+<Link to='/'>
+  <h1 className="text-2xl font-bold">My App</h1>
+</Link>
+```
+
+### 3. URL Parameters & Search Params
+
+#### Dynamic Route Parameters
+```javascript
+// Profile.jsx
+const { profileId } = useParams();
+// URL: /profile/123 → profileId = "123"
+```
+
+#### Search Parameters Management
+```javascript
+const [searchParams, setSearchParams] = useSearchParams();
+
+// Set search params
+setSearchParams({ user: "Arman Hossain" });
+// URL becomes: /profile?user=Arman%20Hossain
+```
+
+### 4. Layout Architecture
+
+#### RootLayout Component
+```javascript
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <div className="h-screen flex flex-col overflow-hidden">
+        <Header className="flex-shrink-0 h-16" />
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar className="flex-shrink-0 w-64" />
+          <main className="flex-1 overflow-y-auto">
+            <Outlet /> {/* Child routes render here */}
+          </main>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+## Page Components
+
+### Dashboard
+- Uses MainContent component
+- Dynamic heading updates
+- Theme-aware styling
+- Context API demonstration
+
+### Profile
+- Demonstrates URL parameters (`/profile/:profileId`)
+- Search params manipulation
+- useLocation hook usage
+- Dynamic query string updates
+
+### Login
+- Form handling with controlled inputs
+- Navigation after form submission
+- Standalone layout (no sidebar)
+
+### About
+- Static content page
+- Responsive grid layout
+- Contact information
+- Technology showcase
+
+### NotFound (404)
+- Error page with navigation options
+- Links back to home and login
+- User-friendly error messaging
+
+## Router Hooks Demonstrated
+
+### useNavigate
+```javascript
+const navigate = useNavigate();
+navigate('/dashboard');           // Simple navigation
+navigate(`/profile/${userId}`);   // Dynamic navigation
+```
+
+### useParams
+```javascript
+const { profileId } = useParams();
+// Access dynamic route segments
+```
+
+### useSearchParams
+```javascript
+const [searchParams, setSearchParams] = useSearchParams();
+const user = searchParams.get('user');
+setSearchParams({ user: 'John' });
+```
+
+### useLocation
+```javascript
+const location = useLocation();
+// Access current location object
+// { pathname, search, hash, state }
+```
+
+## Context API Integration
+
+### Theme Context Flow
+```
+ThemeProvider (URL sync)
+     ↓
+ThemeContext
+     ↓
+useTheme() hook
+     ↓
+Components (Header, Sidebar, MainContent)
+```
+
+### Benefits Demonstrated
+- No prop drilling across route boundaries
+- Persistent theme state across page navigation
+- URL-synchronized global state
+- Clean component architecture
+
+## Styling & UI
+
+### Responsive Design
+- Mobile-first approach with Tailwind CSS
+- Flexible layouts that work on all screen sizes
+- Overflow handling for content areas
+
+### Theme System
+- Consistent dark/light theme implementation
+- Smooth transitions between themes
+- Theme-aware component styling
+
+### Icons
+- FontAwesome icons integrated via CDN
+- Theme toggle with moon/sun icons
+- Professional UI components
+
+## Running the Application
+
+### Development
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+### Dependencies
+```json
+{
+  "react": "^19.1.1",
+  "react-dom": "^19.1.1",
+  "react-router": "^7.x.x",
+  "clsx": "^2.x.x"
+}
+```
+
+## Learning Outcomes
+
+After exploring this application, you'll understand:
+
+### React Router v7
+- ✅ Nested routing with layouts
+- ✅ Dynamic route parameters
+- ✅ Search parameter management
+- ✅ Programmatic navigation
+- ✅ Route-based code organization
+
+### State Management
+- ✅ Context API for global state
+- ✅ Custom hooks for clean abstractions
+- ✅ URL state synchronization
+- ✅ Local vs global state patterns
+
+### Modern React Patterns
+- ✅ Layout components with Outlet
+- ✅ Custom hooks (useTheme)
+- ✅ Controlled components
+- ✅ Effect-driven URL sync
+- ✅ Responsive design principles
+
+## Browser Features
+
+### URL Features Demonstrated
+- Bookmarkable theme preferences
+- Shareable URLs with state
+- Browser back/forward navigation
+- Direct URL access to any route
+
+### Navigation Patterns
+- Breadcrumb-style navigation
+- Sidebar navigation
+- Programmatic redirects
+- Form submission navigation
+
+This application serves as a comprehensive example of modern React development with routing, state management, and user experience best practices! 🚀

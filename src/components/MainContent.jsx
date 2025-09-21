@@ -16,7 +16,7 @@ export default function MainContent() {
   
   return (
     <main className={clsx(
-        "flex-1 p-8 transition-colors duration-300",
+        "flex-1 p-8 transition-colors duration-300 min-h-screen",
         theme === "light" && "bg-white text-gray-800",
         theme === "dark" && "bg-gray-800 text-white"
       )}>
